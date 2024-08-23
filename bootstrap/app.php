@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -11,7 +16,7 @@
 |
 */
 
-$app = new Illuminate\Foundation\Application(
+$app = new Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
@@ -27,29 +32,10 @@ $app = new Illuminate\Foundation\Application(
 */
 
 $app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
+    Kernel::class,
     App\Http\Kernel::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
+    ConsoleKernel::class,
     App\Console\Kernel::class
-);
-
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
-);
-
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
-
-return $app;
